@@ -8,7 +8,7 @@ namespace Elgamal_cryptography
 {
     public class Elgamal
     {
-        private int a, b, c, p, g;
+        private int a, p, g, k, r, s;
         private NumberGenerator ng = new NumberGenerator();
 
         public void GenerateNumbers()
@@ -16,6 +16,14 @@ namespace Elgamal_cryptography
             p = ng.GetP();
             a = ng.GetRandomNumberSmallerThan(p);
             g = ng.GetRandomNumberSmallerThan(p);
+            k = ng.GetCoprimeInteger(p);
+            //generate r properly
+            r = MathOperations.PowModulo(g, k, p);
+        }
+
+        public override string ToString()
+        {
+            return "p: " + p + " a: " + a + " g: " + g + " k:" + k + " r:" + r;
         }
     }
 }

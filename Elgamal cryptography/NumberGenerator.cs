@@ -34,6 +34,29 @@ namespace Elgamal_cryptography
             return rand.Next(1, p);
         }
 
+        public int GetCoprimeInteger(int p)
+        {
+            int potentialCoprimeInteger, k;
+            int b = p;
+
+            do
+            {
+                potentialCoprimeInteger = rand.Next(2, p);
+                p = b;
+                k = potentialCoprimeInteger;
+                while (potentialCoprimeInteger != p)
+                {
+                    if (potentialCoprimeInteger > p)
+                        potentialCoprimeInteger -= p;
+                    else
+                        p -= potentialCoprimeInteger;
+                }
+
+            } while (potentialCoprimeInteger != 1);
+
+            return k;
+        }
+
         private static bool IsPrime(int number)
         {
             if (number == 1) return false;

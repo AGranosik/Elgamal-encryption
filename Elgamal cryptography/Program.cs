@@ -10,10 +10,10 @@ namespace Elgamal_cryptography
     {
         static void Main(string[] args)
         {
-            NumberGenerator ng = new NumberGenerator();
-            int i = MathOperations.PowModulo(88, 24, 9);
+            Elgamal elgamal = new Elgamal();
 
-            Console.WriteLine(i);
+            elgamal.GenerateNumbers();
+            Console.WriteLine(elgamal.ToString());
 
             Console.ReadKey();
         }
