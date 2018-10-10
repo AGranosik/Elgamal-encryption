@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Elgamal_cryptography</RootNamespace>
     <AssemblyName>Elgamal cryptography</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -42,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elgamal.cs" />
+    <Compile Include="Display\ConsoleDisplayer.cs" />
+    <Compile Include="Display\Interfaces\IDisplayHander.cs" />
+    <Compile Include="Encryption\Elgamal.cs" />
     <Compile Include="MathOperations.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Program.cs" />
@@ -51,5 +54,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

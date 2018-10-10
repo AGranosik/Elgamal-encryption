@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elgamal_cryptography
+namespace Elgamal_cryptography.Encriptions
 {
     public class Elgamal
     {
-        private int a, p, g, k, r, s;
+        private int a, p, g, k,s;
+        private UInt64 r;
         private NumberGenerator ng = new NumberGenerator();
 
         public void GenerateNumbers()
