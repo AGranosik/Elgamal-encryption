@@ -47,6 +47,7 @@
     <Compile Include="Display\Interfaces\IDisplayHander.cs" />
     <Compile Include="Encryption\Elgamal.cs" />
     <Compile Include="MathOperations.cs" />
+    <Compile Include="MessageHandler.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

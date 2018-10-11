@@ -12,14 +12,18 @@ namespace Elgamal_cryptography.Encriptions
         private UInt64 r;
         private NumberGenerator ng = new NumberGenerator();
 
-        public void GenerateNumbers()
+        public void GeneratePublicKeys()
         {
             p = ng.GetP();
             a = ng.GetRandomNumberSmallerThan(p);
             g = ng.GetRandomNumberSmallerThan(p);
             k = ng.GetCoprimeInteger(p);
-            //generate r properly
+        }
+
+        public void GeneratePrivateKeys(UInt64 message)
+        {
             r = MathOperations.PowModulo(g, k, p);
+
         }
 
         public override string ToString()

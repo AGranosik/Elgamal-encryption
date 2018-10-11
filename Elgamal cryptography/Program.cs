@@ -1,3 +1,5 @@
+using Elgamal_cryptography.Display;
+using Elgamal_cryptography.Display.Interfaces;
 using Elgamal_cryptography.Encriptions;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,9 @@ namespace Elgamal_cryptography
         static void Main(string[] args)
         {
             Elgamal elgamal = new Elgamal();
+            IDisplayHander displayHander = new ConsoleDisplayer(elgamal);
 
-            elgamal.GenerateNumbers();
-            Console.WriteLine(elgamal.ToString());
+            displayHander.MainMenu();
 
             Console.ReadKey();
         }

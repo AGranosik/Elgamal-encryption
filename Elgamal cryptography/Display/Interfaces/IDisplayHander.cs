@@ -8,7 +8,7 @@ namespace Elgamal_cryptography.Display.Interfaces
     public interface IDisplayHander
     {
         void MainMenu();
-        void GenerateVariables();
+        void GeneratePublicKeys();
         void Verify();
         void LoadFromFile();
         void SaveToFile();
