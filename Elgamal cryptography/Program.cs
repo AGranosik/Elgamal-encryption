@@ -17,12 +17,6 @@ namespace Elgamal_cryptography
             IDisplayHander displayHander = new ConsoleDisplayer(elgamal);
 
 
-            //foreach (var e in NumberConverter.IntToBits(33))
-            //    Console.Write(e.ToString());
-
-            //Console.WriteLine(MathOperations.BitsMultiplier(NumberConverter.IntToBits(5), NumberConverter.IntToBits(3)));
-
-
             displayHander.MainMenu();
 
             Console.ReadKey();
