@@ -9,7 +9,7 @@ namespace Elgamal_cryptography
     {
         public static int GenerateMessage()
         {
-            return new Random().Next(200);
+            return new Random().Next();
         }
 
         public static string HashMessage(int message)

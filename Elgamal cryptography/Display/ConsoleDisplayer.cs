@@ -19,11 +19,9 @@ namespace Elgamal_cryptography.Display
         {
             _elgamal.GeneratePublicKeys();
         }
-        public void GeneratePrivateKeys(string message)
+        public void GeneratePrivateKeys(int message)
         {
-            var lenght = message.Length;
-            UInt64 mess = UInt64.Parse(message, System.Globalization.NumberStyles.HexNumber);
-            _elgamal.GeneratePrivateKeys(mess);
+            _elgamal.GeneratePrivateKeys(message);
         }
 
         public void LoadFromFile()
@@ -34,15 +32,15 @@ namespace Elgamal_cryptography.Display
         public void MainMenu()
         {
             Console.WriteLine("Generuj klucze publiczne");
-            Console.ReadKey();
             GeneratePublicKeys();
             Console.WriteLine(_elgamal.ToString());
             Console.WriteLine("Press key to generate Message");
-            Console.ReadKey();
-            var message = MessageHandler.HashMessage(MessageHandler.GenerateMessage());
+            var message = MessageHandler.GenerateMessage();
             Console.WriteLine("Hashed Message : " + message);
             Console.WriteLine("Generuj klucze prywatne : ");
             GeneratePrivateKeys(message);
+            Console.WriteLine(_elgamal.ToString());
+            Console.ReadKey();
 
         }
 
