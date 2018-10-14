@@ -10,26 +10,26 @@ namespace Elgamal_cryptography
 
         public static UInt64 PowModulo(int a, int[] b, int mod)
         {
-            //convert b to bits
-            //int[] bits = Convert.ToString(b, 2)
-            //            .Select(c => int.Parse(c.ToString()))
-            //            .ToArray();
-
-            List<UInt64> values = new List<UInt64>();
-            UInt64 prevValue = UInt64.Parse(a.ToString());
             UInt64 mod64 = UInt64.Parse(mod.ToString());
 
-            if (b[0] == 1)
-                values.Add(UInt64.Parse(a.ToString()));
+            a = a % mod;
 
-            for(var i =1; i < b.Count(); i++)
+            UInt64 result = 1;
+
+            UInt64 x = UInt64.Parse(a.ToString());
+
+            for (int i = 0; i < b.Count(); i++)
             {
-                prevValue = (prevValue * prevValue) % mod64;
-                if(b[i] == 1)
-                    values.Add(prevValue);
+                if (b[i] == 1)
+                {
+                    result = result * x;
+                    result = result % mod64;
+                }
+                x = x * x;
+                x = x % mod64;
             }
 
-            return values.Aggregate((x, y) => x*y) % mod64;
+            return result;
         }
 
         public static UInt64 PowModulo(UInt64 a, int[] b, int mod)
@@ -39,21 +39,49 @@ namespace Elgamal_cryptography
             //            .Select(c => int.Parse(c.ToString()))
             //            .ToArray();
 
-            List<UInt64> values = new List<UInt64>();
-            UInt64 prevValue = a;
             UInt64 mod64 = UInt64.Parse(mod.ToString());
 
-            if (b[0] == 1)
-                values.Add(UInt64.Parse(a.ToString()));
+            a = a % mod64;
 
-            for (var i = 1; i < b.Count(); i++)
+            UInt64 result = 1;
+
+            UInt64 x = a;
+
+            for(int i =0; i < b.Count(); i++)
             {
-                prevValue = (prevValue * prevValue) % mod64;
-                if (b[i] == 1)
-                    values.Add(prevValue);
+                if(b[i] == 1)
+                {
+                    result = result * x;
+                    result = result % mod64;
+                }
+                x = x * x;
+                x = x % mod64;
             }
 
-            return values.Aggregate((x, y) => x * y) % mod64;
+            //List<UInt64> values = new List<UInt64>();
+            //UInt64 mod64 = UInt64.Parse(mod.ToString());
+            //UInt64 prevValue = a % mod64;
+
+
+            //if (b[0] == 1)
+            //    values.Add(prevValue);
+
+            //for (var i = 1; i < b.Count(); i++)
+            //{
+            //    prevValue = prevValue * prevValue;
+            //    prevValue = prevValue % mod64;
+            //    if (b[i] == 1)
+            //        values.Add(prevValue);
+            //}
+
+            //UInt64 result = 1;
+
+            //foreach (var e in values)
+            //    result *= e;
+
+            //result = result % mod64;
+
+            return result;
         }
 
         public static string BitsMultiplier(int[] a, int[] b)

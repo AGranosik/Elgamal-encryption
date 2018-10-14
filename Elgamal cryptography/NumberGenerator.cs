@@ -23,7 +23,7 @@ namespace Elgamal_cryptography
             int p = rand.Next();
 
             while (!IsPrime(p))
-                p = rand.Next();
+                p = rand.Next(2500);
 
             return p;
             
@@ -41,7 +41,7 @@ namespace Elgamal_cryptography
 
             do
             {
-                potentialCoprimeInteger = rand.Next(2, p);
+                potentialCoprimeInteger = rand.Next(2, b);
                 p = b;
                 k = potentialCoprimeInteger;
                 while (potentialCoprimeInteger != p)

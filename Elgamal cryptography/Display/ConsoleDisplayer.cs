@@ -36,12 +36,11 @@ namespace Elgamal_cryptography.Display
             Console.WriteLine(_elgamal.ToString());
             Console.WriteLine("Press key to generate Message");
             var message = MessageHandler.GenerateMessage();
-            Console.WriteLine("Hashed Message : " + message);
+            Console.WriteLine("Message : " + message);
             Console.WriteLine("Generuj klucze prywatne : ");
             GeneratePrivateKeys(message);
             Console.WriteLine(_elgamal.ToString());
-            Console.ReadKey();
-
+            
         }
 
         public void SaveToFile()

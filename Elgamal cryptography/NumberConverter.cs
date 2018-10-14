@@ -33,6 +33,9 @@ namespace Elgamal_cryptography
                 else
                     arr[j] = 0;
             }
+
+            Array.Reverse(arr);
+
             return arr;
         }
     }
