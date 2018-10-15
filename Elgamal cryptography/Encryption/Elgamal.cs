@@ -54,7 +54,7 @@ namespace Elgamal_cryptography.Encriptions
 
         public override string ToString()
         {
-            return "p: " + p + " b :" + b + " a: " + a + " g: " + g + " k:" + k + " r:" + r + " kprim : " + kprim + " s: " + ss;
+            return "p: " + p + " b :" + b + " a: " + a + " g: " + g + " k:" + k + " r:" + r + " kprim : " + kprim + " s: " + ss + " m: " + m ;
         }
     }
 }

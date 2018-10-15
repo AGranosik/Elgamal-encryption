@@ -31,16 +31,16 @@ namespace Elgamal_cryptography.Display
 
         public void MainMenu()
         {
-            Console.WriteLine("Generuj klucze publiczne");
+            //Console.WriteLine("Generuj klucze publiczne");
             GeneratePublicKeys();
-            Console.WriteLine(_elgamal.ToString());
-            Console.WriteLine("Press key to generate Message");
+            //Console.WriteLine(_elgamal.ToString());
+            //Console.WriteLine("Press key to generate Message");
             var message = MessageHandler.GenerateMessage();
-            Console.WriteLine("Message : " + message);
-            Console.WriteLine("Generuj klucze prywatne : ");
+            //Console.WriteLine("Message : " + message);
+            //Console.WriteLine("Generuj klucze prywatne : ");
             GeneratePrivateKeys(message);
             Console.WriteLine(_elgamal.ToString());
-            
+
         }
 
         public void SaveToFile()

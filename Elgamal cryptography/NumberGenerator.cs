@@ -20,10 +20,10 @@ namespace Elgamal_cryptography
         public int GetP()//public key
         {
             //p is large prime number
-            int p = rand.Next();
+            int p = rand.Next(1999000);
 
             while (!IsPrime(p))
-                p = rand.Next(2500);
+                p = rand.Next(1990000);
 
             return p;
             

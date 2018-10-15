@@ -16,15 +16,8 @@ namespace Elgamal_cryptography
             Elgamal elgamal = new Elgamal();
             IDisplayHander displayHander = new ConsoleDisplayer(elgamal);
 
-
-            //displayHander.MainMenu();
-
-            UInt64 a = UInt64.Parse("43");
-            UInt64 b = UInt64.Parse("16");
-            int p = 101;
-
-            //b nie jest poprawnie przekonwertowane
-            Console.WriteLine(MathOperations.PowModulo(a, NumberConverter.UInt64ToBits(b), p));
+            for (int i = 0; i < 1000; i++)
+                displayHander.MainMenu();
 
             Console.ReadKey();
         }
