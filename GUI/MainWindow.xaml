@@ -12,21 +12,25 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button Content="Generuj klucze" Click="GeneratePublicKeys" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Width="147" Margin="100,360,0,0" Height="41"/>
-        <Button Content="Wczytuaj z pliku" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Width="147" Margin="342,360,0,0" Height="41"></Button>
+        <Button Content="Wczytuaj z pliku" Click="LoadFromFile" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Width="147" Margin="342,360,0,0" Height="41"></Button>
         <Button Content="Deszyfruj" Click="Decrypt" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Width="147" Margin="596,360,0,0" Height="41"></Button>
         <Label Content="P:" HorizontalAlignment="Left" Height="32" Margin="51,40,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
-        <Label Content="K:" HorizontalAlignment="Left" Height="32" Margin="51,104,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
-        <Label Content="R:" HorizontalAlignment="Left" Height="32" Margin="51,174,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.407,2.774"/>
-        <Label Content="S:" HorizontalAlignment="Left" Height="32" Margin="51,234,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
-        <Label x:Name="PText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,40,0,0" Width="325"/>
-        <Label x:Name="SText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,240,0,0" Width="325"/>
-        <Label x:Name="RText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,174,0,0" Width="325"/>
-        <Label x:Name="KText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,104,0,0" Width="325"/>
+        <Label Content="G:" HorizontalAlignment="Left" Height="32" Margin="51,104,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
+        <Label Content="B:" HorizontalAlignment="Left" Height="32" Margin="51,174,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.407,2.774"/>
+        <Label Content="R:" HorizontalAlignment="Left" Height="32" Margin="51,302,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.407,2.774"/>
+        <Label Content="S:" HorizontalAlignment="Left" Height="32" Margin="51,248,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
+        <Label x:Name="PText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,40,0,0" Width="270"/>
+        <Label x:Name="SText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,240,0,0" Width="270"/>
+        <Label x:Name="BText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,174,0,0" Width="270"/>
+        <Label x:Name="RText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,308,0,0" Width="270"/>
+        <Label x:Name="GText" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="100,104,0,0" Width="270"/>
         <Label Content="x1:" HorizontalAlignment="Left" Height="32" Margin="480,98,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
         <Label Content="x2:" HorizontalAlignment="Left" Height="32" Margin="480,174,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="35"/>
+        <Label Content="Wiadomość:" HorizontalAlignment="Left" Height="32" Margin="448,34,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="87"/>
         <Label x:Name="ValidField" Content="" HorizontalAlignment="Left" Height="32" Margin="577,216,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="56"/>
         <Label x:Name="x1Text" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="552,98,0,0" Width="236"/>
         <Label x:Name="x2Text" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="552,174,0,0" Width="236"/>
+        <Label x:Name="MessageField" Content="" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Margin="552,40,0,0" Width="236"/>
         <Label x:Name="Valid" Content="Poprawny?" HorizontalAlignment="Left" Height="32" Margin="480,216,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="79"/>
 
 
