@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Display\ConsoleDisplayer.cs" />
     <Compile Include="Display\Interfaces\IDisplayHander.cs" />
-    <Compile Include="ElgamalDescryptor.cs" />
+    <Compile Include="ElgamalDecryptor.cs" />
     <Compile Include="Encryption\Elgamal.cs" />
     <Compile Include="MathOperations.cs" />
     <Compile Include="MessageHandler.cs" />

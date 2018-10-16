@@ -9,52 +9,49 @@ namespace Elgamal_cryptography.Encriptions
 {
     public class Elgamal
     {
-        private int a, p, g, k, kprim, m;
-        private UInt64 r, ss, b;
-        private NumberGenerator ng = new NumberGenerator();
+        public int A { get; set; }
+        public int P { get; set; }
+        public int G { get; set; }
+        public int K { get; set; }
+        public int Kprim { get; set; }
+        public int M { get; set; }
+        public UInt64 R { get; set; }
+        public UInt64 Ss { get; set; }
+        public UInt64 B { get; set; }
+        public NumberGenerator ng = new NumberGenerator();
+
+
 
         public void GeneratePublicKeys()
         {
-            p = ng.GetP();
-            a = ng.GetRandomNumberSmallerThan(p);
-            g = ng.GetCoprimeInteger(p - 1);
-            b = MathOperations.PowModulo(g, NumberConverter.IntToBits(a), p);
-            //p = 739;
-            //a = 25;
-            //g = 7;
-            //b = MathOperations.PowModulo(g, NumberConverter.IntToBits(a), p);
+            P = ng.GetP();
+            A = ng.GetRandomNumberSmallerThan(P);
+            G = ng.GetCoprimeInteger(P - 1);
+            B = MathOperations.PowModulo(G, NumberConverter.IntToBits(A), P);
 
         }
 
         public void GeneratePrivateKeys(int message)
         {
-            m = message;
-            //m = 100;
-            k = ng.GetCoprimeInteger(p - 1);
-            //k = 127;
-            r = MathOperations.PowModulo(g, NumberConverter.IntToBits(k), p);
-            kprim = MathOperations.InversePow(k, p-1);
-            Int64 s = Int64.Parse(a.ToString()) * Int64.Parse(r.ToString());
-            s = Int64.Parse(m.ToString()) - s;
-            s = s * Int64.Parse(kprim.ToString());
-            s = s % Int64.Parse((p - 1).ToString());
-
+            M = message;
+            K = ng.GetCoprimeInteger(P - 1);
+            R = MathOperations.PowModulo(G, NumberConverter.IntToBits(K), P);
+            Kprim = MathOperations.InversePow(K, P-1);
+            Int64 s = Int64.Parse(A.ToString()) * Int64.Parse(R.ToString());
+            s = Int64.Parse(M.ToString()) - s;
+            s = s * Int64.Parse(Kprim.ToString());
+            s = s % Int64.Parse((P - 1).ToString());
             if(s < 0)
             {
-                s += (p - 1);
+                s += (P - 1);
             }
-            ss = UInt64.Parse(s.ToString());
-
-            //s = UInt64.Parse(kprim.ToString()) * (UInt64.Parse(m.ToString()) - ar) % UInt64.Parse((p - 1).ToString());
-
-            ElgamalDescryptor dec = new ElgamalDescryptor();
-
-            Console.WriteLine( dec.IsCorrect(b, r, ss, g, m, p));
+            Ss = UInt64.Parse(s.ToString());
+            ElgamalDecryptor dec = new ElgamalDecryptor();
         }
 
         public override string ToString()
         {
-            return "p: " + p + " b :" + b + " a: " + a + " g: " + g + " k:" + k + " r:" + r + " kprim : " + kprim + " s: " + ss + " m: " + m ;
+            return "p: " + P + " b :" + B + " a: " + A + " g: " + G + " k:" + K + " r:" + R + " kprim : " + Kprim + " s: " + Ss + " m: " + M ;
         }
     }
 }

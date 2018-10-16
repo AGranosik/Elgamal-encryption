@@ -9,10 +9,12 @@ namespace Elgamal_cryptography.Display
 {
     public class ConsoleDisplayer : IDisplayHander
     {
-        private Elgamal _elgamal; 
-        public ConsoleDisplayer(Elgamal elgamal)
+        private Elgamal _elgamal;
+        private ElgamalDecryptor _decryptor;
+        public ConsoleDisplayer(Elgamal elgamal, ElgamalDecryptor decryptor)
         {
             _elgamal = elgamal;
+            _decryptor = decryptor;
         }
 
         public void GeneratePublicKeys()
@@ -31,26 +33,28 @@ namespace Elgamal_cryptography.Display
 
         public void MainMenu()
         {
-            //Console.WriteLine("Generuj klucze publiczne");
+            Console.WriteLine("Generuj publiczne");
             GeneratePublicKeys();
-            //Console.WriteLine(_elgamal.ToString());
-            //Console.WriteLine("Press key to generate Message");
             var message = MessageHandler.GenerateMessage();
-            //Console.WriteLine("Message : " + message);
-            //Console.WriteLine("Generuj klucze prywatne : ");
             GeneratePrivateKeys(message);
             Console.WriteLine(_elgamal.ToString());
-
+            Console.WriteLine("Deszyfruj : ");
+            Console.ReadKey();
+            string decryption = "Czy podpis jest prawdziwy ? \n";
+            decryption += Decrypt() ? "TAK" : "NIE";
+            Console.WriteLine(decryption);
         }
+
+
 
         public void SaveToFile()
         {
             throw new NotImplementedException();
         }
 
-        public void Verify()
+        public bool Decrypt()
         {
-            throw new NotImplementedException();
+            return _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
         }
     }
 }

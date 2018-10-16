@@ -14,9 +14,9 @@ namespace Elgamal_cryptography
         static void Main(string[] args)
         {
             Elgamal elgamal = new Elgamal();
-            IDisplayHander displayHander = new ConsoleDisplayer(elgamal);
+            ElgamalDecryptor decryptor = new ElgamalDecryptor();
+            IDisplayHander displayHander = new ConsoleDisplayer(elgamal, decryptor);
 
-            for (int i = 0; i < 1000; i++)
                 displayHander.MainMenu();
 
             Console.ReadKey();

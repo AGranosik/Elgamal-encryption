@@ -9,9 +9,8 @@ namespace Elgamal_cryptography.Display.Interfaces
     {
         void MainMenu();
         void GeneratePublicKeys();
-        void Verify();
         void LoadFromFile();
         void SaveToFile();
-
+        bool Decrypt();
     }
 }
