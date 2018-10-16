@@ -21,7 +21,7 @@ namespace GUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IDisplayHander
+    public partial class MainWindow : Window
     {
         private Elgamal _elgamal = null;
         private ElgamalDecryptor _decryptor = null;
@@ -35,14 +35,22 @@ namespace GUI
                 _decryptor = new ElgamalDecryptor();
         }
 
-        public bool Decrypt()
+        public void Decrypt(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           var result = _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
+            x1Text.Content = _decryptor.x1;
+            x2Text.Content = _decryptor.x2;
+            ValidField.Content = result ? "TAK" : "NIE";
         }
 
-        public void GeneratePublicKeys()
+        public void GeneratePublicKeys(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            _elgamal.GeneratePublicKeys();
+            _elgamal.GeneratePrivateKeys(MessageHandler.GenerateMessage());
+            PText.Content = _elgamal.P.ToString();
+            KText.Content = _elgamal.K.ToString();
+            RText.Content = _elgamal.R.ToString();
+            SText.Content = _elgamal.Ss.ToString();
         }
 
         public void LoadFromFile()
@@ -58,6 +66,11 @@ namespace GUI
         public void SaveToFile()
         {
             throw new NotImplementedException();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
