@@ -34,10 +34,6 @@ namespace Elgamal_cryptography
 
         public static UInt64 PowModulo(UInt64 a, int[] b, int mod)
         {
-            //convert b to bits
-            //int[] bits = Convert.ToString(b, 2)
-            //            .Select(c => int.Parse(c.ToString()))
-            //            .ToArray();
 
             UInt64 mod64 = UInt64.Parse(mod.ToString());
 

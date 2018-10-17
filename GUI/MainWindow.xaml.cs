@@ -26,6 +26,7 @@ namespace GUI
     {
         private Elgamal _elgamal = null;
         private ElgamalDecryptor _decryptor = null;
+        private bool FromFile = false;
 
         public MainWindow()
         {
@@ -39,8 +40,18 @@ namespace GUI
         public void Decrypt(object sender, RoutedEventArgs e)
         {
            var result = _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
-            x1Text.Content = _decryptor.x1;
-            x2Text.Content = _decryptor.x2;
+            if (FromFile)
+            {
+                x1Text.Content = _decryptor.x1;
+                x2Text.Content = _decryptor.x2;
+
+            }
+            else
+            {
+                x1Text.Content = MessageHandler.HashMessage(_decryptor.x1);
+                x2Text.Content = MessageHandler.HashMessage(_decryptor.x2);
+            }
+
             ValidField.Content = result ? "TAK" : "NIE";
         }
 
@@ -48,12 +59,8 @@ namespace GUI
         {
             _elgamal.GeneratePublicKeys();
             _elgamal.GeneratePrivateKeys(MessageHandler.GenerateMessage());
-            PText.Content = _elgamal.P.ToString();
-            BText.Content = _elgamal.B.ToString();
-            GText.Content = _elgamal.G.ToString();
-            RText.Content = _elgamal.R.ToString();
-            SText.Content = _elgamal.Ss.ToString();
-            MessageField.Content = _elgamal.M.ToString();
+            DisplayKeys();
+            FromFile = false;
         }
 
         public void LoadFromFile(object sender, RoutedEventArgs e)
@@ -80,17 +87,28 @@ namespace GUI
                     _elgamal.Ss = UInt64.Parse(sr.ReadLine());
                     _elgamal.M = int.Parse(sr.ReadLine());
                 }
+                PText.Content = _elgamal.P.ToString();
+                BText.Content = _elgamal.B.ToString();
+                GText.Content = _elgamal.G.ToString();
+                RText.Content = _elgamal.R.ToString();
+                SText.Content = _elgamal.Ss.ToString();
+                MessageField.Content = _elgamal.M.ToString();
             }
             catch (Exception ex)
             {
 
             }
-            PText.Content = _elgamal.P.ToString();
-            BText.Content = _elgamal.B.ToString();
-            GText.Content = _elgamal.G.ToString();
-            RText.Content = _elgamal.R.ToString();
-            SText.Content = _elgamal.Ss.ToString();
-            MessageField.Content = _elgamal.M.ToString();
+            FromFile = true;
+        }
+
+        public void DisplayKeys()
+        {
+            PText.Content = MessageHandler.HashMessage(_elgamal.P);
+            BText.Content = MessageHandler.HashMessage(_elgamal.B);
+            GText.Content = MessageHandler.HashMessage( _elgamal.G);
+            RText.Content = MessageHandler.HashMessage(_elgamal.R);
+            SText.Content = MessageHandler.HashMessage(_elgamal.Ss);
+            MessageField.Content = MessageHandler.HashMessage(_elgamal.M);
         }
     }
 }
