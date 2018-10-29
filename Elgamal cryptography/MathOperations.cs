@@ -85,7 +85,19 @@ namespace Elgamal_cryptography
                     if (a[tmp] == 1)
                         return 1;
                     tmp--;
-                } while (tmp > bLenght);
+                } while (tmp > bLenght-1);
+
+                int index = b.Length - 1;
+                do
+                {
+                    if (a[index] > b[index])
+                        return 1;
+                    else if (a[index] < b[index])
+                        return -1;
+
+                    index--;
+                } while (index >= 0);
+
             }
             else if (bLenght > aLenght)
             {
@@ -96,7 +108,18 @@ namespace Elgamal_cryptography
                     if (b[tmp] == 1)
                         return -1;
                     tmp--;
-                } while (tmp > aLenght);
+                } while (tmp > aLenght-1);
+
+                int index = a.Length - 1;
+                do
+                {
+                    if (a[index] > b[index])
+                        return 1;
+                    else if (a[index] < b[index])
+                        return -1;
+
+                    index--;
+                } while (index >= 0);
             }
             else
             {
@@ -283,6 +306,19 @@ namespace Elgamal_cryptography
 
             return res;
 
+        }
+
+        public static int[] Modulo(int[] a, int[] mod)
+        {
+            int higher = HigherThan(a, mod);
+            if (higher == -1)
+                return a;
+            else if (higher == 0)
+                return new int[1];
+
+            a = BitsSubstraction(a, mod);
+
+            return Modulo(a, mod);
         }
 
         public static int InversePow(int a, int n)

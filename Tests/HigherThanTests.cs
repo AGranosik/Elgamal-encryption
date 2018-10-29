@@ -15,6 +15,7 @@ namespace Tests
             Assert.AreEqual(1, MathOperations.HigherThan(NumberConverter.IntToBits(232), NumberConverter.IntToBits(231)));
             Assert.AreEqual(1, MathOperations.HigherThan(NumberConverter.IntToBits(2500), NumberConverter.IntToBits(2)));
             Assert.AreEqual(1, MathOperations.HigherThan(NumberConverter.IntToBits(2738514), NumberConverter.IntToBits(12458)));
+            Assert.AreEqual(1, MathOperations.HigherThan(NumberConverter.IntToBits(3), NumberConverter.IntToBits(2)));
             
         }
 
