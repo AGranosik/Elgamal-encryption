@@ -43,5 +43,15 @@ namespace Elgamal_cryptography
 
             return arr;
         }
+
+        public static int BitsToInt(int[] bits)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = bits.Length - 1; i >= 0; i--)
+                sb.Append(bits[i]).ToString();
+
+            return Convert.ToInt32(sb.ToString(), 2);
+        }
     }
 }

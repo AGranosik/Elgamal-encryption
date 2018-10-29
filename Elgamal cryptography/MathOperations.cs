@@ -7,6 +7,113 @@ namespace Elgamal_cryptography
 {
     public static class MathOperations
     {
+        //b always smaller than a
+        public static int[] BitsSubstraction(int[] a, int[] b)
+        {
+            if (b.Length > a.Length)
+                return null;
+            var higher = HigherThan(a, b);
+            if (higher == -1)
+                return null;
+            else if (higher == 0)
+                return new int[a.Length-1]; // returns 0
+
+            int[] result = new int[a.Length];
+            int[] bProperLenght = new int[a.Length];
+                for(int i =0; i < b.Length; i++)
+                {
+                    bProperLenght[i] = b[i];
+                }
+
+            var index = 0;
+            int super = 0;
+
+            do
+            {
+                var tmpResult = a[index] - bProperLenght[index];
+
+                if(super == 1)
+                {
+                    if(tmpResult == -1)
+                    {
+                        super = 1;
+                        result[index] = 0;
+                    }
+                    else if(tmpResult == 0)
+                    {
+                        super = 1;
+                        result[index] = 1;
+                    }
+                    else
+                    {
+                        super = 0;
+                        result[index] = 0;
+                    }
+                }
+                else
+                {
+                    if(tmpResult == -1)
+                    {
+                        super = 1;
+                        result[index] = 1;
+                    }
+                    else
+                    {
+                        super = 0;
+                        result[index] = tmpResult;
+                    }
+                }
+                index++;
+            } while (index < a.Length);
+
+            return result;
+
+        }
+
+        //1 - a is higher, 0 - equal, -1 b is higher
+        public static int HigherThan(int[] a, int[] b)
+        {
+            int aLenght = a.Length;
+            int bLenght = b.Length;
+
+            if(aLenght > bLenght)
+            {
+                int tmp = aLenght-1;
+
+                do
+                {
+                    if (a[tmp] == 1)
+                        return 1;
+                    tmp--;
+                } while (tmp > bLenght);
+            }
+            else if (bLenght > aLenght)
+            {
+                int tmp = bLenght - 1;
+
+                do
+                {
+                    if (b[tmp] == 1)
+                        return -1;
+                    tmp--;
+                } while (tmp > aLenght);
+            }
+            else
+            {
+                int tmp = aLenght - 1;
+                do
+                {
+                    if (a[tmp] > b[tmp])
+                        return 1;
+                    else if (a[tmp] < b[tmp])
+                        return -1;
+
+                    tmp--;
+                } while (tmp >= 0);
+            }
+
+            return 0;
+        }
 
         public static UInt64 PowModulo(int a, int[] b, int mod)
         {

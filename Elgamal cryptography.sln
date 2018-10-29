@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elgamal cryptography", "Elg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{8C94EF00-37E8-4963-84F6-18D4FE060A9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{03F8A201-05A7-4B6C-B711-2CA976AE5B13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8C94EF00-37E8-4963-84F6-18D4FE060A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C94EF00-37E8-4963-84F6-18D4FE060A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C94EF00-37E8-4963-84F6-18D4FE060A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F8A201-05A7-4B6C-B711-2CA976AE5B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F8A201-05A7-4B6C-B711-2CA976AE5B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F8A201-05A7-4B6C-B711-2CA976AE5B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F8A201-05A7-4B6C-B711-2CA976AE5B13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
