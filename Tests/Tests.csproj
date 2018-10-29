@@ -52,6 +52,7 @@
     <Compile Include="HigherThanTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BitsSubstractionTests.cs" />
+    <Compile Include="BitsMultiplier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

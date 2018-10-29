@@ -187,19 +187,19 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public static string BitsMultiplier(int[] a, int[] b)
+        public static int[] BitsMultiplier(int[] a, int[] b)
         {
             List<List<int>> toSum = new List<List<int>>();
 
             List<int> tmp;
 
             int empty = 0;
-            for(int i = b.Length-1; i >= 0; i--)
+            for(int i = 0 ; i < b.Length; i++)
             {
                 tmp = new List<int>();
                 for (var z = 0; z < empty; z++)
                     tmp.Add(0);
-                for (int j=a.Length-1; j >= 0; j--)
+                for (int j=0; j < a.Length; j++)
                 {
                     tmp.Add(a[j] * b[i]);
                 }
@@ -274,12 +274,14 @@ namespace Elgamal_cryptography
                     } while (super == 1);
             }
 
-            StringBuilder sc = new StringBuilder();
+            int[] res = new int[result.Count];
 
-            for (int i = result.Count - 1; i >= 0; i--)
-                sc.Append(result[i].ToString());
+            for(int i =0; i < result.Count; i++)
+            {
+                res[i] = result[i];
+            }
 
-            return sc.ToString();
+            return res;
 
         }
 
