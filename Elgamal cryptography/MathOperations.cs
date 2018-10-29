@@ -10,16 +10,15 @@ namespace Elgamal_cryptography
         //b always smaller than a
         public static int[] BitsSubstraction(int[] a, int[] b)
         {
-            if (b.Length > a.Length)
-                return null;
             var higher = HigherThan(a, b);
             if (higher == -1)
                 return null;
             else if (higher == 0)
                 return new int[a.Length-1]; // returns 0
 
-            int[] result = new int[a.Length];
-            int[] bProperLenght = new int[a.Length];
+            int length = a.Length > b.Length ? a.Length : b.Length;
+            int[] result = new int[length];
+            int[] bProperLenght = new int[length];
                 for(int i =0; i < b.Length; i++)
                 {
                     bProperLenght[i] = b[i];
@@ -311,14 +310,36 @@ namespace Elgamal_cryptography
         public static int[] Modulo(int[] a, int[] mod)
         {
             int higher = HigherThan(a, mod);
-            if (higher == -1)
-                return a;
-            else if (higher == 0)
+
+            if (higher == 0)
                 return new int[1];
 
-            a = BitsSubstraction(a, mod);
+            while (higher == 1)
+            {
+                if (higher == 0)
+                    return new int[1];
+                a = BitsSubstraction(a, mod);
+                higher = HigherThan(a, mod);
+            }
 
-            return Modulo(a, mod);
+            return a;
+        }
+
+        public static int[] GCD (int[] a, int[] b)
+        {
+            int higher = HigherThan(a, b);
+
+            while(higher != 0)
+            {
+                if (higher == 1)
+                    a = BitsSubstraction(a, b);
+                else
+                    b = BitsSubstraction(b, a);
+
+                higher = HigherThan(a, b);
+            }
+
+            return a;
         }
 
         public static int InversePow(int a, int n)
