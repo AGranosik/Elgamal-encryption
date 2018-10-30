@@ -367,5 +367,63 @@ namespace Elgamal_cryptography
             if (v < 0) v = (v + n) % n;
             return v;
         }
+
+        public static int[] BitsAddition(int[] a, int[] b)
+        {
+            int[] newA, newB;
+            if(a.Length > b.Length)
+            {
+                newA = a;
+                newB = new int[a.Length];
+
+                for (int i = 0; i < b.Length; i++)
+                    newB[i] = b[i];
+            }
+            else if(a.Length < b.Length)
+            {
+                newB = b;
+                newA = new int[b.Length];
+
+                for (int i = 0; i < a.Length; i++)
+                    newA[i] = a[i];
+            }
+            else
+            {
+                newA = a;
+                newB = b;
+            }
+            int[] result = new int[newA.Length + 1];
+            int super = 0;
+            for(int i =0; i < newA.Length; i++)
+            {
+                int tmpRes = super + newA[i] + newB[i];
+
+                if(tmpRes == 3)
+                {
+                    super = 1;
+                    result[i] = 1;
+                }
+                else if(tmpRes == 0)
+                {
+                    super = 0;
+                    result[i] = 0;
+                }
+                else if(tmpRes == 2)
+                {
+                    super = 1;
+                    result[i] = 0;
+                }
+                else
+                {
+                    super = 0;
+                    result[i] = 1;
+                }
+            }
+
+            if (super == 1)
+                result[result.Length - 1] = 1;
+
+            return result;
+        }
     }
 }

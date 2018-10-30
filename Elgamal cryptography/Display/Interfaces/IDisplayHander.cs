@@ -11,6 +11,6 @@ namespace Elgamal_cryptography.Display.Interfaces
         void GeneratePublicKeys();
         void LoadFromFile();
         void SaveToFile();
-        bool Decrypt();
+        //bool Decrypt();
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="BitsMultiplier.cs" />
     <Compile Include="ModuloTests.cs" />
     <Compile Include="GCDTests.cs" />
+    <Compile Include="BitsAddition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

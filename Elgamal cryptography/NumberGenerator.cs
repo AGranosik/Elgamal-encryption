@@ -17,44 +17,40 @@ namespace Elgamal_cryptography
                 rand = new Random();
         }
 
-        public int GetP()//public key
+        public int[] GetP(int keyLenght)//public key
         {
-            //p is large prime number
-            int p = rand.Next(1999000);
+            int[] result = new int[keyLenght];
 
-            while (!IsPrime(p))
-                p = rand.Next(1990000);
+            for (int i = 0; i < keyLenght; i++)
+                result[i] = rand.Next() % 2;
 
-            return p;
-            
+
+
+            return result;
         }
 
-        public int GetRandomNumberSmallerThan(int p)
+        public int[] GetRandomNumberSmallerThan(int[] p)
         {
-            return rand.Next(1, p);
-        }
-
-        public int GetCoprimeInteger(int p)
-        {
-            int potentialCoprimeInteger, k;
-            int b = p;
-
+            int[] tmp = new int[p.Length];
             do
             {
-                potentialCoprimeInteger = rand.Next(2, b);
-                p = b;
-                k = potentialCoprimeInteger;
-                while (potentialCoprimeInteger != p)
-                {
-                    if (potentialCoprimeInteger > p)
-                        potentialCoprimeInteger -= p;
-                    else
-                        p -= potentialCoprimeInteger;
-                }
+                tmp = GetP(1024);
+            } while (MathOperations.HigherThan(tmp, p) < -1);
 
-            } while (potentialCoprimeInteger != 1);
 
-            return k;
+            return tmp;
+        }
+
+        public int[] GetCoprimeInteger(int[] p)
+        {
+            int[] tmp = new int[p.Length];
+            int[] one = { 1 };
+            //do
+            //{
+            //    tmp
+            //} while (MathOperations.HigherThan(MathOperations.GCD(tmp, p), one) == 0);
+
+            return tmp;
         }
 
         private static bool IsPrime(int number)

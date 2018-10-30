@@ -41,7 +41,7 @@ namespace Elgamal_cryptography.Display
             Console.WriteLine("Deszyfruj : ");
             Console.ReadKey();
             string decryption = "Czy podpis jest prawdziwy ? \n";
-            decryption += Decrypt() ? "TAK" : "NIE";
+            //decryption += Decrypt() ? "TAK" : "NIE";
             Console.WriteLine(decryption);
         }
 
@@ -52,9 +52,9 @@ namespace Elgamal_cryptography.Display
             throw new NotImplementedException();
         }
 
-        public bool Decrypt()
-        {
-            return _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
-        }
+        //public bool Decrypt()
+        //{
+        //    return _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
+        //}
     }
 }

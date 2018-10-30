@@ -9,8 +9,8 @@ namespace Elgamal_cryptography.Encriptions
 {
     public class Elgamal
     {
-        public int A { get; set; }
-        public int P { get; set; }
+        public int[] A { get; set; }
+        public int[] P { get; set; }
         public int G { get; set; }
         public int K { get; set; }
         public int Kprim { get; set; }
@@ -24,29 +24,29 @@ namespace Elgamal_cryptography.Encriptions
 
         public void GeneratePublicKeys()
         {
-            P = ng.GetP();
+            P = ng.GetP(1024);
             A = ng.GetRandomNumberSmallerThan(P);
-            G = ng.GetCoprimeInteger(P - 1);
-            B = MathOperations.PowModulo(G, NumberConverter.IntToBits(A), P);
+            //G = ng.GetCoprimeInteger(P - 1);
+            //B = MathOperations.PowModulo(G, NumberConverter.IntToBits(A), P);
 
         }
 
         public void GeneratePrivateKeys(int message)
         {
-            M = message;
-            K = ng.GetCoprimeInteger(P - 1);
-            R = MathOperations.PowModulo(G, NumberConverter.IntToBits(K), P);
-            Kprim = MathOperations.InversePow(K, P-1);
-            Int64 s = Int64.Parse(A.ToString()) * Int64.Parse(R.ToString());
-            s = Int64.Parse(M.ToString()) - s;
-            s = s * Int64.Parse(Kprim.ToString());
-            s = s % Int64.Parse((P - 1).ToString());
-            if(s < 0)
-            {
-                s += (P - 1);
-            }
-            Ss = UInt64.Parse(s.ToString());
-            ElgamalDecryptor dec = new ElgamalDecryptor();
+            //M = message;
+            //K = ng.GetCoprimeInteger(P - 1);
+            //R = MathOperations.PowModulo(G, NumberConverter.IntToBits(K), P);
+            //Kprim = MathOperations.InversePow(K, P-1);
+            //Int64 s = Int64.Parse(A.ToString()) * Int64.Parse(R.ToString());
+            //s = Int64.Parse(M.ToString()) - s;
+            //s = s * Int64.Parse(Kprim.ToString());
+            //s = s % Int64.Parse((P - 1).ToString());
+            //if(s < 0)
+            //{
+            //    s += (P - 1);
+            //}
+            //Ss = UInt64.Parse(s.ToString());
+            //ElgamalDecryptor dec = new ElgamalDecryptor();
         }
 
         public override string ToString()
