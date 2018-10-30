@@ -21,6 +21,22 @@ namespace Elgamal_cryptography
         {
             int[] result = new int[keyLenght];
 
+            do
+            {
+                for (int i = 0; i < keyLenght; i++)
+                    result[i] = rand.Next() % 2;
+            } while (!IsPrime(result));
+
+
+
+
+            return result;
+        }
+
+        public int[] GetNUmber(int keyLenght)//public key
+        {
+            int[] result = new int[keyLenght];
+
             for (int i = 0; i < keyLenght; i++)
                 result[i] = rand.Next() % 2;
 
@@ -53,21 +69,24 @@ namespace Elgamal_cryptography
             return tmp;
         }
 
-        private static bool IsPrime(int number)
+        public static bool IsPrime(int[] number)
         {
-            if (number == 1) return false;
-            if (number == 2) return true;
-            if (number == 3) return true;
-            if (number % 2 == 0) return false;
-            if (number % 3 == 0) return false;
+            int[] one = { 1 };
+            int[] two = { 0, 1 };
+            int[] three = { 1, 1 };
+            int[] six = { 0, 1, 1 };
+            if (MathOperations.HigherThan(number, one) == 0) return false;
+            if (MathOperations.HigherThan(number, two) == 0) return true;
+            if (MathOperations.HigherThan(number, three) == 0) return true;
+            if (NumberConverter.BitsToInt(MathOperations.Modulo(number, two)) == 0) return false;
+            if (NumberConverter.BitsToInt(MathOperations.Modulo(number, three)) == 0) return false;
 
-            int i = 5;
-
-            while(i*i <= number)
+            int[] i = { 0, 0, 1 };
+            while(MathOperations.HigherThan(MathOperations.BitsMultiplier(i, i), number) <=0)
             {
-                if (number % i == 0 || number % (i+2) == 0)
+                if (NumberConverter.BitsToInt(MathOperations.Modulo(number, i)) == 0 || NumberConverter.BitsToInt(MathOperations.Modulo(number, MathOperations.BitsAddition(i, two))) == 0)
                     return false;
-                i += 6;
+                i = MathOperations.BitsAddition(i, six);
             }
 
             return true;

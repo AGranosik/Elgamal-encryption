@@ -293,7 +293,7 @@ namespace Elgamal_cryptography
                             super = 0;
                             result[resultIndex] = 0;
                         }
-                    } while (super == 1);
+                    } while (super == 1 && resultIndex+1 < result.Count);
             }
 
             int[] res = new int[result.Count];
@@ -316,10 +316,10 @@ namespace Elgamal_cryptography
 
             while (higher == 1)
             {
-                if (higher == 0)
-                    return new int[1];
                 a = BitsSubstraction(a, mod);
                 higher = HigherThan(a, mod);
+                if (higher == 0)
+                    return new int[1];
             }
 
             return a;
