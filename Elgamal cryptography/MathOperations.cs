@@ -236,7 +236,14 @@ namespace Elgamal_cryptography
             List<int> result = new List<int>();
 
             //dodać oczyszczanie z zero potem
-            for (int i = 0; i < 64; i++)
+            //ZWIEKSZENIE ZAKRESU
+            int lenght = 0;
+            foreach (var list in toSum)
+                if (list.Count() > lenght)
+                    lenght = list.Count();
+
+            lenght++;
+            for (int i = 0; i < lenght; i++)
                 result.Add(0);
 
             int super = 0;
@@ -318,9 +325,11 @@ namespace Elgamal_cryptography
             {
                 a = BitsSubstraction(a, mod);
                 higher = HigherThan(a, mod);
-                if (higher == 0)
-                    return new int[1];
+
             }
+
+            if (higher == 0)
+                return new int[1];
 
             return a;
         }

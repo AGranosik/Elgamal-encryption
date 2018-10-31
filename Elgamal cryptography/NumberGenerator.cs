@@ -78,7 +78,7 @@ namespace Elgamal_cryptography
             if (MathOperations.HigherThan(number, one) == 0) return false;
             if (MathOperations.HigherThan(number, two) == 0) return true;
             if (MathOperations.HigherThan(number, three) == 0) return true;
-            if (NumberConverter.BitsToInt(MathOperations.Modulo(number, two)) == 0) return false;
+            if (NumberConverter.BitsToInt(MathOperations.Modulo  (number, two)) == 0) return false;
             if (NumberConverter.BitsToInt(MathOperations.Modulo(number, three)) == 0) return false;
 
             int[] i = { 0, 0, 1 };
