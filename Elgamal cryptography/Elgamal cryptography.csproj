@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigIntegerExtension.cs" />
     <Compile Include="Display\ConsoleDisplayer.cs" />
     <Compile Include="Display\Interfaces\IDisplayHander.cs" />
     <Compile Include="ElgamalDecryptor.cs" />

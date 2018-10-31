@@ -4,6 +4,7 @@ using Elgamal_cryptography.Encriptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,10 @@ namespace Elgamal_cryptography
             ElgamalDecryptor decryptor = new ElgamalDecryptor();
             IDisplayHander displayHander = new ConsoleDisplayer(elgamal, decryptor);
 
-                displayHander.MainMenu();
+            displayHander.MainMenu();
+
+
+
 
             Console.ReadKey();
         }

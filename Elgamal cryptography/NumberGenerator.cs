@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,22 +10,22 @@ namespace Elgamal_cryptography
     public class NumberGenerator
     {
         private static Random rand;
-
+        private List<BigInteger> listOfPrimes = new List<BigInteger>();
         public NumberGenerator()
         {
             //singleton
             if (rand == null)
                 rand = new Random();
+
+            listOfPrimes.Add(6);
         }
 
-        public int[] GetP(int keyLenght)//public key
+        public byte[] GetP(int keyLenght)//public key
         {
-            int[] result = new int[keyLenght];
-
+            byte[] result = new byte[keyLenght];
             do
             {
-                for (int i = 0; i < keyLenght; i++)
-                    result[i] = rand.Next() % 2;
+                rand.NextBytes(result);
             } while (!IsPrime(result));
 
 
@@ -33,7 +34,7 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public int[] GetNUmber(int keyLenght)//public key
+        public int[] GetNumber(int keyLenght)//public key
         {
             int[] result = new int[keyLenght];
 
@@ -45,12 +46,12 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public int[] GetRandomNumberSmallerThan(int[] p)
+        public byte[] GetRandomNumberSmallerThan(byte[] p)
         {
-            int[] tmp = new int[p.Length];
+            byte[] tmp = new byte[p.Length];
             do
             {
-                tmp = GetP(1024);
+                tmp = GetP(p.Length);
             } while (MathOperations.HigherThan(tmp, p) < -1);
 
 
@@ -69,27 +70,54 @@ namespace Elgamal_cryptography
             return tmp;
         }
 
-        public static bool IsPrime(int[] number)
+        public static bool IsPrime(byte[] number)
         {
-            int[] one = { 1 };
-            int[] two = { 0, 1 };
-            int[] three = { 1, 1 };
-            int[] six = { 0, 1, 1 };
-            if (MathOperations.HigherThan(number, one) == 0) return false;
-            if (MathOperations.HigherThan(number, two) == 0) return true;
-            if (MathOperations.HigherThan(number, three) == 0) return true;
-            if (NumberConverter.BitsToInt(MathOperations.Modulo  (number, two)) == 0) return false;
-            if (NumberConverter.BitsToInt(MathOperations.Modulo(number, three)) == 0) return false;
+            var num = NumberConverter.BitsArraystoString(number);
 
-            int[] i = { 0, 0, 1 };
-            while(MathOperations.HigherThan(MathOperations.BitsMultiplier(i, i), number) <=0)
+            if (num < 2)
             {
-                if (NumberConverter.BitsToInt(MathOperations.Modulo(number, i)) == 0 || NumberConverter.BitsToInt(MathOperations.Modulo(number, MathOperations.BitsAddition(i, two))) == 0)
+                return false;
+            }
+
+            if (num == 2)
+            {
+                return true;
+            }
+
+            if (num % 2 == 0)
+            {
+                return false;
+            }
+
+            var sqrtOfNumber = BigIntegerExtension.Sqrt(num);
+
+            for (var index = 3; index <= sqrtOfNumber; index += 2) //skip even numbers 
+            {
+                if (num % index == 0)
+                {
                     return false;
-                i = MathOperations.BitsAddition(i, six);
+                }
             }
 
             return true;
+            //var num = NumberConverter.BitsArraystoString(number);
+            //if (num == 1) return false;
+            //if (num == 2) return true;
+            //if (num == 3) return true;
+            //if (num % 2 == 0) return false;
+            //if (num % 3 == 0) return false;
+
+
+
+            //BigInteger i = 6;
+            //while (i * i < num)
+            //{
+            //    if (num % i == 0 || num % (i + 2) == 0)
+            //        return false;
+            //    i += 6;
+            //}
+
+            //return true;
         }
     }
 }

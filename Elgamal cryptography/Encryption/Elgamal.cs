@@ -9,8 +9,8 @@ namespace Elgamal_cryptography.Encriptions
 {
     public class Elgamal
     {
-        public int[] A { get; set; }
-        public int[] P { get; set; }
+        public byte[] A { get; set; }
+        public byte[] P { get; set; }
         public int G { get; set; }
         public int K { get; set; }
         public int Kprim { get; set; }
@@ -24,7 +24,7 @@ namespace Elgamal_cryptography.Encriptions
 
         public void GeneratePublicKeys()
         {
-            P = ng.GetP(1024);
+            P = ng.GetP(64);
             A = ng.GetRandomNumberSmallerThan(P);
             //G = ng.GetCoprimeInteger(P - 1);
             //B = MathOperations.PowModulo(G, NumberConverter.IntToBits(A), P);

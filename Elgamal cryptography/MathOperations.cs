@@ -8,17 +8,17 @@ namespace Elgamal_cryptography
     public static class MathOperations
     {
         //b always smaller than a
-        public static int[] BitsSubstraction(int[] a, int[] b)
+        public static byte[] BitsSubstraction(byte[] a, byte[] b)
         {
             var higher = HigherThan(a, b);
             if (higher == -1)
                 return null;
             else if (higher == 0)
-                return new int[a.Length-1]; // returns 0
+                return new byte[a.Length-1]; // returns 0
 
             int length = a.Length > b.Length ? a.Length : b.Length;
-            int[] result = new int[length];
-            int[] bProperLenght = new int[length];
+            byte[] result = new byte[length];
+            byte[] bProperLenght = new byte[length];
                 for(int i =0; i < b.Length; i++)
                 {
                     bProperLenght[i] = b[i];
@@ -56,10 +56,16 @@ namespace Elgamal_cryptography
                         super = 1;
                         result[index] = 1;
                     }
+                    else if (tmpResult == 0)
+                    {
+                        super = 0;
+                        result[index] = 0;
+                    }
                     else
                     {
                         super = 0;
-                        result[index] = tmpResult;
+                        result[index] = 1;
+
                     }
                 }
                 index++;
@@ -70,7 +76,7 @@ namespace Elgamal_cryptography
         }
 
         //1 - a is higher, 0 - equal, -1 b is higher
-        public static int HigherThan(int[] a, int[] b)
+        public static int HigherThan(byte[] a, byte[] b)
         {
             int aLenght = a.Length;
             int bLenght = b.Length;
@@ -209,7 +215,7 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public static int[] BitsMultiplier(int[] a, int[] b)
+        public static byte[] BitsMultiplier(byte[] a, byte[] b)
         {
             List<List<int>> toSum = new List<List<int>>();
 
@@ -303,23 +309,23 @@ namespace Elgamal_cryptography
                     } while (super == 1 && resultIndex+1 < result.Count);
             }
 
-            int[] res = new int[result.Count];
+            byte[] res = new byte[result.Count];
 
             for(int i =0; i < result.Count; i++)
             {
-                res[i] = result[i];
+                res[i] = (byte)result[i];
             }
 
             return res;
 
         }
 
-        public static int[] Modulo(int[] a, int[] mod)
+        public static byte[] Modulo(byte[] a, byte[] mod)
         {
             int higher = HigherThan(a, mod);
 
             if (higher == 0)
-                return new int[1];
+                return new byte[1];
 
             while (higher == 1)
             {
@@ -329,12 +335,12 @@ namespace Elgamal_cryptography
             }
 
             if (higher == 0)
-                return new int[1];
+                return new byte[1];
 
             return a;
         }
 
-        public static int[] GCD (int[] a, int[] b)
+        public static byte[] GCD (byte[] a, byte[] b)
         {
             int higher = HigherThan(a, b);
 
@@ -377,13 +383,13 @@ namespace Elgamal_cryptography
             return v;
         }
 
-        public static int[] BitsAddition(int[] a, int[] b)
+        public static byte[] BitsAddition(byte[] a, byte[] b)
         {
-            int[] newA, newB;
+            byte[] newA, newB;
             if(a.Length > b.Length)
             {
                 newA = a;
-                newB = new int[a.Length];
+                newB = new byte[a.Length];
 
                 for (int i = 0; i < b.Length; i++)
                     newB[i] = b[i];
@@ -391,7 +397,7 @@ namespace Elgamal_cryptography
             else if(a.Length < b.Length)
             {
                 newB = b;
-                newA = new int[b.Length];
+                newA = new byte[b.Length];
 
                 for (int i = 0; i < a.Length; i++)
                     newA[i] = a[i];
@@ -401,7 +407,7 @@ namespace Elgamal_cryptography
                 newA = a;
                 newB = b;
             }
-            int[] result = new int[newA.Length + 1];
+            byte[] result = new byte[newA.Length + 1];
             int super = 0;
             for(int i =0; i < newA.Length; i++)
             {
