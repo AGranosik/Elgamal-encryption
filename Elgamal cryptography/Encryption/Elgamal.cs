@@ -11,23 +11,23 @@ namespace Elgamal_cryptography.Encriptions
     {
         public byte[] A { get; set; }
         public byte[] P { get; set; }
-        public int G { get; set; }
+        public byte[] G { get; set; }
         public int K { get; set; }
         public int Kprim { get; set; }
         public int M { get; set; }
         public UInt64 R { get; set; }
         public UInt64 Ss { get; set; }
-        public UInt64 B { get; set; }
+        public byte[] B { get; set; }
         public NumberGenerator ng = new NumberGenerator();
 
 
 
         public void GeneratePublicKeys()
         {
-            P = ng.GetP(64);
+            P = ng.GetP(128);
             A = ng.GetRandomNumberSmallerThan(P);
-            //G = ng.GetCoprimeInteger(P - 1);
-            //B = MathOperations.PowModulo(G, NumberConverter.IntToBits(A), P);
+            G = ng.GetCoprimeInteger(P);
+            B = MathOperations.PowModulo(G, A, P);
 
         }
 

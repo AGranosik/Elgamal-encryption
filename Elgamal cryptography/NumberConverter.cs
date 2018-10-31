@@ -78,5 +78,12 @@ namespace Elgamal_cryptography
 
             return res;
         } 
+
+        public static byte[] BigInttoBytes(BigInteger number)
+        {
+            var tmp = number.ToByteArray();
+            Array.Reverse(tmp);
+            return tmp;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace Elgamal_cryptography
@@ -165,6 +166,40 @@ namespace Elgamal_cryptography
             }
 
             return result;
+        }
+
+        public static byte[] PowModulo(byte[] a, byte[] b, byte[] mod)
+        {
+
+            var aa = NumberConverter.BitsArraystoString(a);
+            var bb = NumberConverter.BitsArraystoString(b);
+            var modd = NumberConverter.BitsArraystoString(mod);
+
+            var result = BigInteger.ModPow(aa, bb, modd);
+
+            return NumberConverter.BigInttoBytes(result);
+
+            //a = MathOperations.Modulo(a, mod);
+
+            ////a = a % mod;
+
+            ////UInt64 result = 1;
+            //byte[] result = { 1 };
+
+            ////UInt64 x = UInt64.Parse(a.ToString());
+
+            //for (int i = 0; i < b.Count(); i++)
+            //{
+            //    if (b[i] == 1)
+            //    {
+            //        result = BitsMultiplier(a, result);
+            //        result = Modulo(result, mod);
+            //    }
+            //    a = MathOperations.BitsMultiplier(a, a);
+            //    a = MathOperations.Modulo(a, mod);
+            //}
+
+            //return result;
         }
 
         public static UInt64 PowModulo(UInt64 a, int[] b, int mod)

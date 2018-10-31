@@ -10,14 +10,12 @@ namespace Elgamal_cryptography
     public class NumberGenerator
     {
         private static Random rand;
-        private List<BigInteger> listOfPrimes = new List<BigInteger>();
+        private static NumberGenerator ng = new NumberGenerator();
         public NumberGenerator()
         {
             //singleton
             if (rand == null)
                 rand = new Random();
-
-            listOfPrimes.Add(6);
         }
 
         public byte[] GetP(int keyLenght)//public key
@@ -34,15 +32,11 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public int[] GetNumber(int keyLenght)//public key
+        public byte[] GetNumber(int keyLenght)//public key
         {
-            int[] result = new int[keyLenght];
+            byte[] result = new byte[keyLenght];
 
-            for (int i = 0; i < keyLenght; i++)
-                result[i] = rand.Next() % 2;
-
-
-
+            rand.NextBytes(result);
             return result;
         }
 
@@ -51,55 +45,59 @@ namespace Elgamal_cryptography
             byte[] tmp = new byte[p.Length];
             do
             {
-                tmp = GetP(p.Length);
+                tmp = GetNumber(p.Length);
             } while (MathOperations.HigherThan(tmp, p) < -1);
 
 
             return tmp;
         }
 
-        public int[] GetCoprimeInteger(int[] p)
+        public byte[] GetCoprimeInteger(byte[] p)
         {
-            int[] tmp = new int[p.Length];
-            int[] one = { 1 };
-            //do
-            //{
-            //    tmp
-            //} while (MathOperations.HigherThan(MathOperations.GCD(tmp, p), one) == 0);
+            byte[] tmp;
+            do
+            {
+                tmp = ng.GetP(p.Length);
+
+            } while (MathOperations.HigherThan(tmp, p) > -1);
 
             return tmp;
+
         }
 
         public static bool IsPrime(byte[] number)
         {
-            var num = NumberConverter.BitsArraystoString(number);
+           return Miller_Rabin.MillerRabin(NumberConverter.BitsArraystoString(number), 700);
 
-            if (num < 2)
-            {
-                return false;
-            }
 
-            if (num == 2)
-            {
-                return true;
-            }
+            //var num = NumberConverter.BitsArraystoString(number);
 
-            if (num % 2 == 0)
-            {
-                return false;
-            }
+            //if (num < 2)
+            //{
+            //    return false;
+            //}
 
-            var sqrtOfNumber = BigIntegerExtension.Sqrt(num);
+            //if (num == 2)
+            //{
+            //    return true;
+            //}
 
-            for (var index = 3; index <= sqrtOfNumber; index += 2) //skip even numbers 
-            {
-                if (num % index == 0)
-                {
-                    return false;
-                }
-            }
+            //if (num % 2 == 0)
+            //{
+            //    return false;
+            //}
 
-            return true;
+            //var sqrtOfNumber = BigIntegerExtension.Sqrt(num);
+
+            //for (BigInteger index = sqrtOfNumber; index >=3; index -= 2) //skip even numbers 
+            //{
+            //    if (num % index == 0)
+            //    {
+            //        return false;
+            //    }
+            //}
+
+            //return true;
             //var num = NumberConverter.BitsArraystoString(number);
             //if (num == 1) return false;
             //if (num == 2) return true;

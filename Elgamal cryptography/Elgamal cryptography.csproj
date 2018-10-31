@@ -51,6 +51,7 @@
     <Compile Include="Encryption\Elgamal.cs" />
     <Compile Include="MathOperations.cs" />
     <Compile Include="MessageHandler.cs" />
+    <Compile Include="Miller_Rabin.cs" />
     <Compile Include="NumberConverter.cs" />
     <Compile Include="NumberGenerator.cs" />
     <Compile Include="Program.cs" />

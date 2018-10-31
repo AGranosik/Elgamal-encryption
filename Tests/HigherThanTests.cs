@@ -22,7 +22,7 @@ namespace Tests
         [TestMethod]
         public void BIsHigher()
         {
-            Assert.AreEqual(-1, MathOperations.HigherThan(NumberConverter.IntToBits(200), NumberConverter.IntToBits(232)));
+            Assert.AreEqual(-1, MathOperations.HigherThan(NumberConverter.IntToBits(231), NumberConverter.IntToBits(232)));
             Assert.AreEqual(-1, MathOperations.HigherThan(NumberConverter.IntToBits(231), NumberConverter.IntToBits(232)));
             Assert.AreEqual(-1, MathOperations.HigherThan(NumberConverter.IntToBits(2), NumberConverter.IntToBits(2500)));
             Assert.AreEqual(-1, MathOperations.HigherThan(NumberConverter.IntToBits(12458), NumberConverter.IntToBits(2738514)));
