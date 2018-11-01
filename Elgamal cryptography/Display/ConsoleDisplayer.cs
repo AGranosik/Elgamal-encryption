@@ -41,7 +41,7 @@ namespace Elgamal_cryptography.Display
             Console.WriteLine("Deszyfruj : ");
             Console.ReadKey();
             string decryption = "Czy podpis jest prawdziwy ? \n";
-            //decryption += Decrypt() ? "TAK" : "NIE";
+            decryption += _decryptor.IsCorrect(_elgamal) ? "TAK" : "NIE";
             Console.WriteLine(decryption);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elgamal_cryptography.Encriptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -8,20 +9,20 @@ namespace Elgamal_cryptography
 {
     public class ElgamalDecryptor
     {
-        public UInt64 x1 { get; set; }
-        public UInt64 x2 { get; set; }
-
-        public bool IsCorrect(UInt64 b, UInt64 r, UInt64 s, int g, int m, int p)
+        public bool IsCorrect(Elgamal elgamal)
         {
-            return true;
-            // x2 = MathOperations.PowModulo(g, NumberConverter.IntToBits(m), p);
-            //UInt64 pp = UInt64.Parse(p.ToString());
+            int[] x2 = MathOperations.PowModulo(elgamal.G, elgamal.M, elgamal.P);
 
-            //UInt64 br = MathOperations.PowModulo(b, NumberConverter.UInt64ToBits(r), p); //b^r%p
-            //UInt64 rs = MathOperations.PowModulo(r, NumberConverter.UInt64ToBits(s), p); //r^s%p
-            //x1 = (br * rs) % UInt64.Parse(p.ToString());
+            int[] br = MathOperations.PowModulo(elgamal.B, elgamal.R, elgamal.P); //b^r%p
+            int[] rs = MathOperations.PowModulo(elgamal.R, elgamal.S, elgamal.P); //r^s%p
+            //int[] x1 = MathOperations.Modulo(MathOperations.BitsMultiplier(br, rs), elgamal.P);
+            var tmp = NumberConverter.BitsArraystoString(br) * NumberConverter.BitsArraystoString(rs) % NumberConverter.BitsArraystoString(elgamal.P);
+            var x1 = NumberConverter.BigInttoBytes(tmp);
 
-            //return x1.Equals(x2);
+            var result = x1.Equals(x2);
+
+            return result;
         }
+
     }
 }
