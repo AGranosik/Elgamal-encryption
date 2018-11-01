@@ -20,9 +20,6 @@ namespace Elgamal_cryptography
 
             displayHander.MainMenu();
 
-
-
-
             Console.ReadKey();
         }
     }

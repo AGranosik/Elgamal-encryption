@@ -18,12 +18,14 @@ namespace Elgamal_cryptography
                 rand = new Random();
         }
 
-        public byte[] GetP(int keyLenght)//public key
+        public int[] GetP(int keyLenght)//public key
         {
-            byte[] result = new byte[keyLenght];
+            int[] result = new int[keyLenght];
             do
             {
-                rand.NextBytes(result);
+                for (int i = 0; i < keyLenght; i++)
+                    result[i] = rand.Next() % 2;
+
             } while (!IsPrime(result));
 
 
@@ -32,17 +34,20 @@ namespace Elgamal_cryptography
             return result;
         }
 
-        public byte[] GetNumber(int keyLenght)//public key
+        public int[] GetNumber(int keyLenght)//public key
         {
-            byte[] result = new byte[keyLenght];
+            int[] result = new int[keyLenght];
 
-            rand.NextBytes(result);
+            for(int i =0; i < keyLenght; i++)
+            {
+                result[i] = rand.Next() % 2;
+            }
             return result;
         }
 
-        public byte[] GetRandomNumberSmallerThan(byte[] p)
+        public int[] GetRandomNumberSmallerThan(int[] p)
         {
-            byte[] tmp = new byte[p.Length];
+            int[] tmp = new int[p.Length];
             do
             {
                 tmp = GetNumber(p.Length);
@@ -52,9 +57,9 @@ namespace Elgamal_cryptography
             return tmp;
         }
 
-        public byte[] GetCoprimeInteger(byte[] p)
+        public int[] GetCoprimeInteger(int[] p)
         {
-            byte[] tmp;
+            int[] tmp;
             do
             {
                 tmp = ng.GetP(p.Length);
@@ -65,7 +70,7 @@ namespace Elgamal_cryptography
 
         }
 
-        public static bool IsPrime(byte[] number)
+        public static bool IsPrime(int[] number)
         {
            return Miller_Rabin.MillerRabin(NumberConverter.BitsArraystoString(number), 700);
 

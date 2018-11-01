@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -8,18 +9,14 @@ namespace Elgamal_cryptography
 {
     public static class NumberConverter
     {
-        public static byte[] IntToBits(int number)
+        public static int[] IntToBits(int number)
         {
             int[] bits = Convert.ToString(number, 2)
                         .Select(c => int.Parse(c.ToString()))
                         .ToArray();
 
-            byte[] result = new byte[bits.Length];
-            for (int i = 0; i < bits.Length; i++)
-                result[i] = (byte)bits[i];
-
-            Array.Reverse(result);
-            return result;
+            Array.Reverse(bits);
+            return bits;
         }
         public static int[] UInt64ToBits(UInt64 n)
         {
@@ -49,7 +46,7 @@ namespace Elgamal_cryptography
             return arr;
         }
 
-        public static int BitsToInt(byte[] bits)
+        public static int BitsToInt(int[] bits)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -59,7 +56,7 @@ namespace Elgamal_cryptography
             return Convert.ToInt32(sb.ToString(), 2);
         }
 
-        public static BigInteger BitsArraystoString(byte[] number)
+        public static BigInteger BitsArraystoString(int[] number)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -79,11 +76,29 @@ namespace Elgamal_cryptography
             return res;
         } 
 
-        public static byte[] BigInttoBytes(BigInteger number)
+        public static int[] BigInttoBytes(BigInteger number)
         {
             var tmp = number.ToByteArray();
-            Array.Reverse(tmp);
-            return tmp;
+
+            StringBuilder sb = new StringBuilder();
+
+            for(int i =0; i < tmp.Length; i++)
+            {
+                sb.Append(Convert.ToString(Convert.ToInt32(tmp[i]), 2));
+            }
+
+            var bitsInString = sb.ToString();
+
+            int[] bits = new int[bitsInString.Length];
+
+            for(var i =0; i< bits.Length; i++)
+            {
+                bits[i] = (int)Char.GetNumericValue(bitsInString[i]);
+            }
+
+            return bits;
+
+            //return BitConverter.GetBytes(tmp).ToArray();
         }
     }
 }

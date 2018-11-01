@@ -104,11 +104,11 @@ namespace GUI
         public void DisplayKeys()
         {
             //PText.Content = MessageHandler.HashMessage(_elgamal.P);
-            BText.Content = MessageHandler.HashMessage(_elgamal.B);
-            GText.Content = MessageHandler.HashMessage( _elgamal.G);
-            RText.Content = MessageHandler.HashMessage(_elgamal.R);
-            SText.Content = MessageHandler.HashMessage(_elgamal.Ss);
-            MessageField.Content = MessageHandler.HashMessage(_elgamal.M);
+            //BText.Content = MessageHandler.HashMessage(_elgamal.B);
+            //GText.Content = MessageHandler.HashMessage( _elgamal.G);
+            //RText.Content = MessageHandler.HashMessage(_elgamal.R);
+            //SText.Content = MessageHandler.HashMessage(_elgamal.Ss);
+            //MessageField.Content = MessageHandler.HashMessage(_elgamal.M);
         }
     }
 }

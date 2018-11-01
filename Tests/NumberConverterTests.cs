@@ -10,7 +10,7 @@ namespace Tests
         [TestMethod]
         public void BitsArraystoStringeTests()
         {
-            byte[] tmp = { 1, 1, 1, 1, 0, 1, 1 };
+            int[] tmp = { 1, 1, 1, 1, 0, 1, 1 };
             Array.Reverse(tmp);
 
             Assert.AreEqual("123", NumberConverter.BitsArraystoString(tmp).ToString());

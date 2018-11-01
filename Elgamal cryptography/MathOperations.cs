@@ -9,17 +9,17 @@ namespace Elgamal_cryptography
     public static class MathOperations
     {
         //b always smaller than a
-        public static byte[] BitsSubstraction(byte[] a, byte[] b)
+        public static int[] BitsSubstraction(int[] a, int[] b)
         {
             var higher = HigherThan(a, b);
             if (higher == -1)
                 return null;
             else if (higher == 0)
-                return new byte[a.Length-1]; // returns 0
+                return new int[a.Length-1]; // returns 0
 
             int length = a.Length > b.Length ? a.Length : b.Length;
-            byte[] result = new byte[length];
-            byte[] bProperLenght = new byte[length];
+            int[] result = new int[length];
+            int[] bProperLenght = new int[length];
                 for(int i =0; i < b.Length; i++)
                 {
                     bProperLenght[i] = b[i];
@@ -77,7 +77,7 @@ namespace Elgamal_cryptography
         }
 
         //1 - a is higher, 0 - equal, -1 b is higher
-        public static int HigherThan(byte[] a, byte[] b)
+        public static int HigherThan(int[] a, int[] b)
         {
             int aLenght = a.Length;
             int bLenght = b.Length;
@@ -144,31 +144,7 @@ namespace Elgamal_cryptography
             return 0;
         }
 
-        public static UInt64 PowModulo(int a, int[] b, int mod)
-        {
-            UInt64 mod64 = UInt64.Parse(mod.ToString());
-
-            a = a % mod;
-
-            UInt64 result = 1;
-
-            UInt64 x = UInt64.Parse(a.ToString());
-
-            for (int i = 0; i < b.Count(); i++)
-            {
-                if (b[i] == 1)
-                {
-                    result = result * x;
-                    result = result % mod64;
-                }
-                x = x * x;
-                x = x % mod64;
-            }
-
-            return result;
-        }
-
-        public static byte[] PowModulo(byte[] a, byte[] b, byte[] mod)
+        public static int[] PowModulo(int[] a, int[] b, int[] mod)
         {
 
             var aa = NumberConverter.BitsArraystoString(a);
@@ -202,55 +178,7 @@ namespace Elgamal_cryptography
             //return result;
         }
 
-        public static UInt64 PowModulo(UInt64 a, int[] b, int mod)
-        {
-
-            UInt64 mod64 = UInt64.Parse(mod.ToString());
-
-            a = a % mod64;
-
-            UInt64 result = 1;
-
-            UInt64 x = a;
-
-            for(int i =0; i < b.Count(); i++)
-            {
-                if(b[i] == 1)
-                {
-                    result = result * x;
-                    result = result % mod64;
-                }
-                x = x * x;
-                x = x % mod64;
-            }
-
-            //List<UInt64> values = new List<UInt64>();
-            //UInt64 mod64 = UInt64.Parse(mod.ToString());
-            //UInt64 prevValue = a % mod64;
-
-
-            //if (b[0] == 1)
-            //    values.Add(prevValue);
-
-            //for (var i = 1; i < b.Count(); i++)
-            //{
-            //    prevValue = prevValue * prevValue;
-            //    prevValue = prevValue % mod64;
-            //    if (b[i] == 1)
-            //        values.Add(prevValue);
-            //}
-
-            //UInt64 result = 1;
-
-            //foreach (var e in values)
-            //    result *= e;
-
-            //result = result % mod64;
-
-            return result;
-        }
-
-        public static byte[] BitsMultiplier(byte[] a, byte[] b)
+        public static int[] BitsMultiplier(int[] a, int[] b)
         {
             List<List<int>> toSum = new List<List<int>>();
 
@@ -344,23 +272,23 @@ namespace Elgamal_cryptography
                     } while (super == 1 && resultIndex+1 < result.Count);
             }
 
-            byte[] res = new byte[result.Count];
+            int[] res = new int[result.Count];
 
             for(int i =0; i < result.Count; i++)
             {
-                res[i] = (byte)result[i];
+                res[i] = result[i];
             }
 
             return res;
 
         }
 
-        public static byte[] Modulo(byte[] a, byte[] mod)
+        public static int[] Modulo(int[] a, int[] mod)
         {
             int higher = HigherThan(a, mod);
 
             if (higher == 0)
-                return new byte[1];
+                return new int[1];
 
             while (higher == 1)
             {
@@ -370,12 +298,12 @@ namespace Elgamal_cryptography
             }
 
             if (higher == 0)
-                return new byte[1];
+                return new int[1];
 
             return a;
         }
 
-        public static byte[] GCD (byte[] a, byte[] b)
+        public static int[] GCD (int[] a, int[] b)
         {
             int higher = HigherThan(a, b);
 
@@ -392,39 +320,51 @@ namespace Elgamal_cryptography
             return a;
         }
 
-        public static int InversePow(int a, int n)
+        public static int[] InversePow(int[] a, int[] n)
         {
-            //for(int i =0; i < mod; i++)
-            //{
-            //    if ((k * i) % mod == 1)
-            //        return i;
+            var aa = NumberConverter.BitsArraystoString(a);
+            var nn = NumberConverter.BitsArraystoString(n);
 
-            //}
-            //return 0;
-
-            int i = n, v = 0, d = 1;
-            while (a > 0)
+            BigInteger i = nn, v = 0, d = 1;
+            while (aa > 0)
             {
-                int t = i / a;
-                int x = a;
-                a = i % x;
+                BigInteger t = i / aa;
+                BigInteger x = aa;
+                aa = i%x;
                 i = x;
                 x = d;
                 d = v - t * x;
                 v = x;
             }
-            v %= n;
-            if (v < 0) v = (v + n) % n;
-            return v;
+            //v %= n;
+            v = v%nn;
+            //if (v < 0) v = (v + n) % n;
+            if (v < 0)
+                v = (v + nn) % nn;
+
+
+
+            return NumberConverter.BigInttoBytes(v);
         }
 
-        public static byte[] BitsAddition(byte[] a, byte[] b)
+        public static int[] Divide (int[] a, int[] b)
         {
-            byte[] newA, newB;
+            BigInteger counter = 0;
+            while(HigherThan(a,b) > -1){
+                a = BitsSubstraction(a, b);
+                counter++;
+            }
+
+            return NumberConverter.BigInttoBytes(counter);
+        }
+
+        public static int[] BitsAddition(int[] a, int[] b)
+        {
+            int[] newA, newB;
             if(a.Length > b.Length)
             {
                 newA = a;
-                newB = new byte[a.Length];
+                newB = new int[a.Length];
 
                 for (int i = 0; i < b.Length; i++)
                     newB[i] = b[i];
@@ -432,7 +372,7 @@ namespace Elgamal_cryptography
             else if(a.Length < b.Length)
             {
                 newB = b;
-                newA = new byte[b.Length];
+                newA = new int[b.Length];
 
                 for (int i = 0; i < a.Length; i++)
                     newA[i] = a[i];
@@ -442,7 +382,7 @@ namespace Elgamal_cryptography
                 newA = a;
                 newB = b;
             }
-            byte[] result = new byte[newA.Length + 1];
+            int[] result = new int[newA.Length + 1];
             int super = 0;
             for(int i =0; i < newA.Length; i++)
             {
