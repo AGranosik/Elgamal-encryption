@@ -11,17 +11,37 @@ namespace Elgamal_cryptography
     {
         public bool IsCorrect(Elgamal elgamal)
         {
-            int[] x2 = MathOperations.PowModulo(elgamal.G, elgamal.M, elgamal.P);
+            int[] x2 = GetX2(elgamal);
 
-            int[] br = MathOperations.PowModulo(elgamal.B, elgamal.R, elgamal.P); //b^r%p
-            int[] rs = MathOperations.PowModulo(elgamal.R, elgamal.S, elgamal.P); //r^s%p
-            //int[] x1 = MathOperations.Modulo(MathOperations.BitsMultiplier(br, rs), elgamal.P);
-            var tmp = NumberConverter.BitsArraystoString(br) * NumberConverter.BitsArraystoString(rs) % NumberConverter.BitsArraystoString(elgamal.P);
-            var x1 = NumberConverter.BigInttoBytes(tmp);
+            int[] br = GetBR(elgamal);
+            int[] rs = GetRS(elgamal);
+            var x1 = GetX1(elgamal, br, rs);
 
-            var result = x1.Equals(x2);
+            var result = MathOperations.HigherThan(x1, x2) == 0;
 
             return result;
+        }
+
+        public int[] GetX1(Elgamal elgamal, int[] br, int[] rs)
+        {
+            var tmp = NumberConverter.BitsArraystoString(br) * NumberConverter.BitsArraystoString(rs) % NumberConverter.BitsArraystoString(elgamal.P);
+
+            return NumberConverter.BigInttoBytes(tmp);
+        }
+
+        public int[] GetX2(Elgamal elgamal)
+        {
+            return MathOperations.PowModulo(elgamal.G, elgamal.M, elgamal.P);
+        }
+
+        public int[] GetBR(Elgamal elgamal)
+        {
+            return MathOperations.PowModulo(elgamal.B, elgamal.R, elgamal.P); //b^r%p
+        }
+
+        public int[] GetRS(Elgamal elgamal)
+        {
+            return MathOperations.PowModulo(elgamal.R, elgamal.S, elgamal.P); //r^s%p
         }
 
     }

@@ -76,7 +76,7 @@ namespace Elgamal_cryptography
             do
             {
                 tmp = GetNumber(p.Length);
-            } while (MathOperations.HigherThan(tmp, p) < -1);
+            } while (MathOperations.HigherThan(tmp, p) != -1);
 
 
             return tmp;
@@ -97,6 +97,9 @@ namespace Elgamal_cryptography
 
         public static bool IsPrime(int[] number)
         {
+            int[] zero = new int[1];
+            if (MathOperations.HigherThan(number, zero) <= 0)
+                return false;
            return Miller_Rabin.MillerRabin(NumberConverter.BitsArraystoString(number), 700);
 
 

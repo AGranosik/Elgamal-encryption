@@ -19,8 +19,10 @@ namespace Elgamal_cryptography.Encriptions
 
         public void GeneratePublicKeys()
         {
-            P = ng.GetP(128);
-            A = ng.GetRandomNumberSmallerThan(P);
+            int[] one = { 1 };
+
+            P = ng.GetP(1024);
+            A = ng.GetRandomNumberSmallerThan(MathOperations.BitsSubstraction(P, one));
             G = ng.GetCoprimeInteger(P);
             B = GenerateB();
 
@@ -57,7 +59,7 @@ namespace Elgamal_cryptography.Encriptions
 
         public override string ToString()
         {
-            return "p: " + NumberConverter.BitsArraystoString(P).ToString() + " b :" + NumberConverter.BitsArraystoString(B).ToString() + " a: " + NumberConverter.BitsArraystoString(A).ToString() + " g: " + NumberConverter.BitsArraystoString(G).ToString() + " k:" + NumberConverter.BitsArraystoString(K).ToString() + " r:" + NumberConverter.BitsArraystoString(R).ToString() + " kprim : " + NumberConverter.BitsArraystoString(Kprim).ToString() + " s: " + NumberConverter.BitsArraystoString(S).ToString() + " m: " + NumberConverter.BitsArraystoString(M).ToString();
+            return "p: " + NumberConverter.BitsArraystoString(P).ToString() + System.Environment.NewLine + " b :" + NumberConverter.BitsArraystoString(B).ToString() + System.Environment.NewLine + " a: " + NumberConverter.BitsArraystoString(A).ToString() + System.Environment.NewLine + " g: " + NumberConverter.BitsArraystoString(G).ToString() + System.Environment.NewLine + " k:" + NumberConverter.BitsArraystoString(K).ToString() + System.Environment.NewLine + " r:" + NumberConverter.BitsArraystoString(R).ToString() + System.Environment.NewLine + " kprim : " + NumberConverter.BitsArraystoString(Kprim).ToString() + System.Environment.NewLine + " s: " + NumberConverter.BitsArraystoString(S).ToString() + System.Environment.NewLine + " m: " + NumberConverter.BitsArraystoString(M).ToString();
         }
     }
 }

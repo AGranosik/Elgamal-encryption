@@ -19,8 +19,8 @@ namespace Tests
         [TestMethod]
         public void BigIntToBitsTest()
         {
-            int[] tmp = { 0,1,0,1};
-            var ss = NumberConverter.BigInttoBytes(new System.Numerics.BigInteger(10));
+            var s2 = NumberConverter.BigInttoBytes(new System.Numerics.BigInteger(429));
+            Assert.AreEqual(429, NumberConverter.BitsToInt(s2));
         }
     }
 }

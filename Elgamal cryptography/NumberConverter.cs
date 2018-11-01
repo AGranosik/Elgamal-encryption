@@ -89,6 +89,8 @@ namespace Elgamal_cryptography
                 {
                     var ttt = Convert.ToString(Convert.ToInt32(tmp[i]), 2);
                     var left = 8 - ttt.Length % 8;
+                    if (left == 8)
+                        left = 0;
                     int j = 0;
                     while (j < left)
                     {

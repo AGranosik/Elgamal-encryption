@@ -11,7 +11,7 @@ namespace Elgamal_cryptography
         {
             NumberGenerator ngg = new NumberGenerator();
 
-            return ngg.GetNumber(1024);
+            return ngg.GetNumber(128);
         }
 
         public static string HashMessage(int message)
