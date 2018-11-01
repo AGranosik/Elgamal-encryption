@@ -95,7 +95,7 @@ namespace Elgamal_cryptography
             {
                 bits[i] = (int)Char.GetNumericValue(bitsInString[i]);
             }
-
+            Array.Reverse(bits);
             return bits;
 
             //return BitConverter.GetBytes(tmp).ToArray();

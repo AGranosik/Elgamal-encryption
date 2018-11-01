@@ -21,7 +21,7 @@ namespace Elgamal_cryptography.Display
         {
             _elgamal.GeneratePublicKeys();
         }
-        public void GeneratePrivateKeys(int message)
+        public void GeneratePrivateKeys(int[] message)
         {
             _elgamal.GeneratePrivateKeys(message);
         }

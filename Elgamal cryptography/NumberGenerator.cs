@@ -34,6 +34,26 @@ namespace Elgamal_cryptography
             return result;
         }
 
+        public int[] GetS(int[] kprim, int[] message, int[] a, int[] r, int[] pMinusOne)
+        {
+            var ar = MathOperations.BitsMultiplier(a, r);
+            var tmp = MathOperations.BitsSubstraction(message, ar);
+            #region
+            BigInteger kprims = NumberConverter.BitsArraystoString(kprim);
+            var aa = NumberConverter.BitsArraystoString(a);
+            var rr = NumberConverter.BitsArraystoString(r);
+            var m = NumberConverter.BitsArraystoString(message);
+
+            var arr = aa * rr;
+
+            var s = m - arr;
+            s = kprims * s;
+
+            #endregion
+
+            return NumberConverter.BigInttoBytes(s);
+        }
+
         public int[] GetNumber(int keyLenght)//public key
         {
             int[] result = new int[keyLenght];

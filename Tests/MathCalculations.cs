@@ -23,7 +23,7 @@ namespace Tests
         [TestMethod]
         public void InversePow()
         {
-            Assert.AreEqual(3, NumberConverter.BitsToInt(MathOperations.InversePow(NumberConverter.IntToBits(10), NumberConverter.IntToBits(7))));
+            Assert.AreEqual(3, NumberConverter.BitsToInt(MathOperations.InversePow(NumberConverter.IntToBits(5), NumberConverter.IntToBits(7))));
         }
     }
 }

@@ -7,9 +7,11 @@ namespace Elgamal_cryptography
 {
     public static class MessageHandler
     {
-        public static int GenerateMessage()
+        public static int[] GenerateMessage()
         {
-            return new Random().Next(1900000);
+            NumberGenerator ngg = new NumberGenerator();
+
+            return ngg.GetNumber(1024);
         }
 
         public static string HashMessage(int message)

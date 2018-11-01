@@ -9,10 +9,10 @@ namespace Elgamal_cryptography.Encriptions
         public int[] G { get; set; }
         public int[] K { get; set; }
         public int[] Kprim { get; set; }
-        public int M { get; set; }
+        public int[] M { get; set; }
         public int[] R { get; set; }
-        public UInt64 Ss { get; set; }
         public int[] B { get; set; }
+        public int[] S { get; set; }
         public NumberGenerator ng = new NumberGenerator();
 
 
@@ -26,27 +26,20 @@ namespace Elgamal_cryptography.Encriptions
 
         }
 
-        public void GeneratePrivateKeys(int message)
+        public void GeneratePrivateKeys(int[] message)
         {
+            int[] one = { 1 };
             M = message;
             K = ng.GetCoprimeInteger(P);
             R = MathOperations.PowModulo(G, K, P);
-            //Kprim = MathOperations.InversePow(K, P - 1);
-            //Int64 s = Int64.Parse(A.ToString()) * Int64.Parse(R.ToString());
-            //s = Int64.Parse(M.ToString()) - s;
-            //s = s * Int64.Parse(Kprim.ToString());
-            //s = s % Int64.Parse((P - 1).ToString());
-            //if(s < 0)
-            //{
-            //    s += (P - 1);
-            //}
-            //Ss = UInt64.Parse(s.ToString());
-            //ElgamalDecryptor dec = new ElgamalDecryptor();
+            Kprim = MathOperations.InversePow(K, MathOperations.BitsSubstraction(P, one));
+            S = ng.GetS(Kprim, M, A, R, MathOperations.BitsSubstraction(P, one));
+            ElgamalDecryptor dec = new ElgamalDecryptor();
         }
 
         public override string ToString()
         {
-            return "p: " + P + " b :" + B + " a: " + A + " g: " + G + " k:" + K + " r:" + R + " kprim : " + Kprim + " s: " + Ss + " m: " + M ;
+            return "p: " + NumberConverter.BitsArraystoString(P).ToString() + " b :" + NumberConverter.BitsArraystoString(B).ToString() + " a: " + NumberConverter.BitsArraystoString(A).ToString() + " g: " + NumberConverter.BitsArraystoString(G).ToString() + " k:" + NumberConverter.BitsArraystoString(K).ToString() + " r:" + NumberConverter.BitsArraystoString(R).ToString() + " kprim : " + NumberConverter.BitsArraystoString(Kprim).ToString() + " s: " + NumberConverter.BitsArraystoString(S).ToString() + " m: " + NumberConverter.BitsArraystoString(M).ToString();
         }
     }
 }
