@@ -82,9 +82,28 @@ namespace Elgamal_cryptography
 
             StringBuilder sb = new StringBuilder();
 
-            for(int i =0; i < tmp.Length; i++)
+            for(int i =tmp.Length-1; i >= 0; i--)
             {
-                sb.Append(Convert.ToString(Convert.ToInt32(tmp[i]), 2));
+
+                if(i != tmp.Length - 1)
+                {
+                    var ttt = Convert.ToString(Convert.ToInt32(tmp[i]), 2);
+                    var left = 8 - ttt.Length % 8;
+                    int j = 0;
+                    while (j < left)
+                    {
+                        j++;
+                        sb.Append("0");
+
+                    }
+                    sb.Append(ttt);
+                }
+                else
+                {
+                    sb.Append(Convert.ToString(Convert.ToInt32(tmp[i]), 2));
+
+                }
+
             }
 
             var bitsInString = sb.ToString();

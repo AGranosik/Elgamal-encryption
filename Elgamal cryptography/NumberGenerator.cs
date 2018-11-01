@@ -39,7 +39,9 @@ namespace Elgamal_cryptography
             var ar = MathOperations.BitsMultiplier(a, r);
             var tmp = MathOperations.BitsSubstraction(message, ar);
             #region
-            BigInteger kprims = NumberConverter.BitsArraystoString(kprim);
+            var kprims = NumberConverter.BitsArraystoString(kprim);
+            var p = NumberConverter.BitsArraystoString(pMinusOne);
+
             var aa = NumberConverter.BitsArraystoString(a);
             var rr = NumberConverter.BitsArraystoString(r);
             var m = NumberConverter.BitsArraystoString(message);
@@ -47,7 +49,10 @@ namespace Elgamal_cryptography
             var arr = aa * rr;
 
             var s = m - arr;
-            s = kprims * s;
+            s = kprims * s %p;
+
+            if (s < 0)
+                s += p;
 
             #endregion
 

@@ -22,19 +22,37 @@ namespace Elgamal_cryptography.Encriptions
             P = ng.GetP(128);
             A = ng.GetRandomNumberSmallerThan(P);
             G = ng.GetCoprimeInteger(P);
-            B = MathOperations.PowModulo(G, A, P);
+            B = GenerateB();
 
+        }
+
+        public int[] GenerateB()
+        {
+            return MathOperations.PowModulo(G, A, P);
         }
 
         public void GeneratePrivateKeys(int[] message)
         {
             int[] one = { 1 };
+
             M = message;
             K = ng.GetCoprimeInteger(P);
-            R = MathOperations.PowModulo(G, K, P);
-            Kprim = MathOperations.InversePow(K, MathOperations.BitsSubstraction(P, one));
+            R = GenerateR();
+            Kprim = GenerateKprim();
             S = ng.GetS(Kprim, M, A, R, MathOperations.BitsSubstraction(P, one));
             ElgamalDecryptor dec = new ElgamalDecryptor();
+        }
+
+        public int[] GenerateR()
+        {
+            return MathOperations.PowModulo(G, K, P);
+        }
+
+        public int[] GenerateKprim()
+        {
+            int[] one = { 1 };
+
+            return MathOperations.InversePow(K, MathOperations.BitsSubstraction(P, one));
         }
 
         public override string ToString()
