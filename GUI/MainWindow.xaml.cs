@@ -39,20 +39,19 @@ namespace GUI
 
         public void Decrypt(object sender, RoutedEventArgs e)
         {
-           //var result = _decryptor.IsCorrect(_elgamal.B, _elgamal.R, _elgamal.Ss, _elgamal.G, _elgamal.M, _elgamal.P);
-           // if (FromFile)
-           // {
-           //     x1Text.Content = _decryptor.x1;
-           //     x2Text.Content = _decryptor.x2;
+            if (FromFile)
+            {
+                x1Text.Content = NumberConverter.BitsArraystoString(_decryptor.GetX1(_elgamal, _decryptor.GetBR(_elgamal), _decryptor.GetRS(_elgamal))).ToString();
+                x2Text.Content = NumberConverter.BitsArraystoString(_decryptor.GetX2(_elgamal)).ToString();
 
-           // }
-           // else
-           // {
-           //     x1Text.Content = MessageHandler.HashMessage(_decryptor.x1);
-           //     x2Text.Content = MessageHandler.HashMessage(_decryptor.x2);
-           // }
+            }
+            else
+            {
+                x1Text.Content = NumberConverter.BitsArraystoString(_decryptor.GetX1(_elgamal, _decryptor.GetBR(_elgamal), _decryptor.GetRS(_elgamal))).ToString();
+                x2Text.Content = NumberConverter.BitsArraystoString(_decryptor.GetX2(_elgamal)).ToString();
+            }
 
-           // ValidField.Content = result ? "TAK" : "NIE";
+            ValidField.Content = _decryptor.IsCorrect(_elgamal) ? "TAK" : "NIE";
         }
 
         public void GeneratePublicKeys(object sender, RoutedEventArgs e)
@@ -103,12 +102,12 @@ namespace GUI
 
         public void DisplayKeys()
         {
-            //PText.Content = MessageHandler.HashMessage(_elgamal.P);
-            //BText.Content = MessageHandler.HashMessage(_elgamal.B);
-            //GText.Content = MessageHandler.HashMessage( _elgamal.G);
-            //RText.Content = MessageHandler.HashMessage(_elgamal.R);
-            //SText.Content = MessageHandler.HashMessage(_elgamal.Ss);
-            //MessageField.Content = MessageHandler.HashMessage(_elgamal.M);
+            PText.Content = NumberConverter.BitsArraystoString(_elgamal.P).ToString();
+            BText.Content = NumberConverter.BitsArraystoString(_elgamal.B).ToString();
+            GText.Content = NumberConverter.BitsArraystoString(_elgamal.G).ToString();
+            RText.Content = NumberConverter.BitsArraystoString(_elgamal.R).ToString();
+            SText.Content = NumberConverter.BitsArraystoString(_elgamal.S).ToString();
+            MessageField.Content = NumberConverter.BitsArraystoString(_elgamal.M).ToString();
         }
     }
 }

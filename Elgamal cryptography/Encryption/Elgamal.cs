@@ -59,7 +59,16 @@ namespace Elgamal_cryptography.Encriptions
 
         public override string ToString()
         {
-            return "p: " + NumberConverter.BitsArraystoString(P).ToString() + System.Environment.NewLine + " b :" + NumberConverter.BitsArraystoString(B).ToString() + System.Environment.NewLine + " a: " + NumberConverter.BitsArraystoString(A).ToString() + System.Environment.NewLine + " g: " + NumberConverter.BitsArraystoString(G).ToString() + System.Environment.NewLine + " k:" + NumberConverter.BitsArraystoString(K).ToString() + System.Environment.NewLine + " r:" + NumberConverter.BitsArraystoString(R).ToString() + System.Environment.NewLine + " kprim : " + NumberConverter.BitsArraystoString(Kprim).ToString() + System.Environment.NewLine + " s: " + NumberConverter.BitsArraystoString(S).ToString() + System.Environment.NewLine + " m: " + NumberConverter.BitsArraystoString(M).ToString();
+            var pp = NumberConverter.BitsArraystoString(P).ToString();
+            var bb = NumberConverter.BitsArraystoString(B).ToString();
+            var aa = NumberConverter.BitsArraystoString(A).ToString();
+            var gg = NumberConverter.BitsArraystoString(G).ToString();
+            var kk = NumberConverter.BitsArraystoString(K).ToString();
+            var rr = NumberConverter.BitsArraystoString(R).ToString();
+            var ss = NumberConverter.BitsArraystoString(S).ToString();
+            var mm = NumberConverter.BitsArraystoString(M).ToString();
+
+            return "p: " +  pp + System.Environment.NewLine + " b :" + bb  + System.Environment.NewLine + " a: " + aa + System.Environment.NewLine + " g: " + gg + System.Environment.NewLine + " k:" + kk + System.Environment.NewLine + " r:" + rr + System.Environment.NewLine + " kprim : " + NumberConverter.BitsArraystoString(Kprim).ToString() + System.Environment.NewLine + " s: " + ss + System.Environment.NewLine + " m: " + mm;
         }
     }
 }

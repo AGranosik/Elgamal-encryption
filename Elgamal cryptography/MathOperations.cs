@@ -154,28 +154,6 @@ namespace Elgamal_cryptography
             var result = BigInteger.ModPow(aa, bb, modd);
 
             return NumberConverter.BigInttoBytes(result);
-
-            //a = MathOperations.Modulo(a, mod);
-
-            ////a = a % mod;
-
-            ////UInt64 result = 1;
-            //byte[] result = { 1 };
-
-            ////UInt64 x = UInt64.Parse(a.ToString());
-
-            //for (int i = 0; i < b.Count(); i++)
-            //{
-            //    if (b[i] == 1)
-            //    {
-            //        result = BitsMultiplier(a, result);
-            //        result = Modulo(result, mod);
-            //    }
-            //    a = MathOperations.BitsMultiplier(a, a);
-            //    a = MathOperations.Modulo(a, mod);
-            //}
-
-            //return result;
         }
 
         public static int[] BitsMultiplier(int[] a, int[] b)
